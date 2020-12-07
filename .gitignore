@@ -17,6 +17,3 @@ Downloads
 .zcompdump
 .zsh_history
 .ssh
-.config/powerlevel10k
-.config/zsh/zsh-autosuggestions
-.config/zsh/zsh-syntax-highlighting
