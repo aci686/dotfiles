@@ -129,8 +129,9 @@ super + ctrl + {Left,Down,Up,Right}
 super + alt + {Left,Down,Up,Right}
 	/home/i686/.bin/resize_bspwm.sh {west,south,north,east}
 
-
-
+# Lock screen
+super + alt + l
+    i3lock-fancy -f Hack Nerd -- scrot -z 
 # ---------------------------------------------
 # CUSTOM
 # ---------------------------------------------
