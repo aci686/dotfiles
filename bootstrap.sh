@@ -21,7 +21,7 @@ if [ $? != 0 ]; then
 fi
 
 echo -e "[$info] Adding additional apt repos..."
-#sudo sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list
+sudo sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list
 if [ $? == 0 ]; then
     echo -e [$check]
 else
