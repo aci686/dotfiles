@@ -5,6 +5,7 @@
 .mozilla
 .config/dconf
 .config/mimeapps.list
+.config/pulse
 Desktop
 Pictures
 Downloads
