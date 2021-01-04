@@ -170,6 +170,11 @@ fi
 
 echo -e "[$info] Set terminator as default terminal for Nemo's context menus..."
 gsettings set org.cinnamon.desktop.default-application.terminal exec terminator
+if [ $? == 0 ]; then
+    echo -e [$check]
+else
+    echo -e [$missing]
+fi
 gsettings set org.cinnamon.desktop.default-application.terminal exec-arg terminator
 if [ $? == 0 ]; then
     echo -e [$check]
@@ -200,3 +205,6 @@ sudo sed -e 's/login-background.svg/02.jpg/g' /usr/share/lightdm/lightdm-gtk-gre
 echo -e "[$info] Install screen lock with auto timer..."
 sudo apt install i3lock-fancy
 sudo apt install xautolock 
+
+echo -e "[$info] Install network connection manager..."
+sudo apt install networ-manager network-manager-gnome
