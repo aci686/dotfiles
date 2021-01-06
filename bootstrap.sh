@@ -208,3 +208,33 @@ sudo apt install xautolock
 
 echo -e "[$info] Install network connection manager..."
 sudo apt install networ-manager network-manager-gnome
+
+echo -e "[$info] Add interfaces to network connection manager..."
+interface_name=$(ip a | grep 'BROADCAST' | awk -F: '{print $2}' | awk '{$1=$1};1')
+echo $interface_name | grep -q 'en' && id='Ethernet'
+echo $interface_name | grep -q 'wl' && id='Wireless'
+type=$(echo $id | tr '[:upper:]' '[:lower:]')
+mac_address=$(ip a show dev $interface_name | grep 'link/ether' | awk '{print $2}'i | tr '[:lower:]' '[:upper:]')
+uuid=$(cat /proc/sys/kernel/random/uuid)
+
+echo "[connection]
+id=$id
+uuid=$uuid
+type=$type
+interface-name=$interface_name
+permissions=
+
+[ethernet]
+mac-address=$mac_address
+mac-address-blacklist=
+
+[ipv4]
+dns-search=
+method=auto
+
+[ipv6]
+addr-gen-mode=stable-privacy
+dns-search=
+ip6-privacy=0
+method=auto" >> /etc/NetworkManager/system-connections/$id.connection
+
