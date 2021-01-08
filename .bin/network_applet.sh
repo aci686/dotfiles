@@ -28,13 +28,11 @@ if (ping -c 1 archlinux.org || ping -c 1 google.com || ping -c 1 bitbucket.org |
             connected=""
         fi
 	active="-a 0"
-	SSID="﬉ $(iwgetid -r)"
-	PIP="$(wget --timeout=30 http://ipinfo.io/ip -qO -)"
+	SSID="﬉ $(iwgetid -r); IP: $(wget --timeout=30 http://ipinfo.io/ip -qO -)"
 	fi
 else
     urgent="-u 0"
-    SSID="Disconnected"
-    PIP="Not Available"
+    SSID="Disconnected; IP: Not Available"
     connected=""
 fi
 
