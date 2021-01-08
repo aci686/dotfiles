@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-style="$($HOME/.config/rofi/applets/applets/style.sh)"
-
-dir="$HOME/.config/rofi/applets/$style"
+dir="$HOME/.config/rofi/applets/"
 rofi_command="rofi -theme $dir/network.rasi"
 
 ## Get info
