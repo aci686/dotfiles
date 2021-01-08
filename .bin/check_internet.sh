@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 count=0
+#connected=" "
 connected="說"
 disconnected="ﲁ"
 
