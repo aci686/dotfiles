@@ -5,9 +5,9 @@ rofi_command="rofi -theme $dir/launcher.rasi"
 
 # Links
 terminal=""
-files=""
-editor=""
-browser=""
+files=""
+editor=""
+browser=""
 music=""
 settings=""
 
