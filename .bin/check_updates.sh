@@ -1,21 +1,6 @@
 #!/usr/bin/bash
+
 #
-#   checkupdates: Safely print a list of pending updates.
-#
-#   Copyright (c) 2013 Kyle Keen <keenerd@gmail.com>
-#
-#   This program is free software; you can redistribute it and/or modify
-#   it under the terms of the GNU General Public License as published by
-#   the Free Software Foundation; either version 2 of the License, or
-#   (at your option) any later version.
-#
-#   This program is distributed in the hope that it will be useful,
-#   but WITHOUT ANY WARRANTY; without even the implied warranty of
-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#   GNU General Public License for more details.
-#
-#   You should have received a copy of the GNU General Public License
-#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
 declare -r myname='checkupdates'
@@ -24,34 +9,34 @@ declare -r myver='1.0.0'
 plain() {
 	(( QUIET )) && return
 	local mesg=$1; shift
-	printf "${BOLD}    ${mesg}${ALL_OFF}\n" "$@" >&1
+	printf "${BOLD} ${mesg}${ALL_OFF}\n" "$@" >&1
 }
 
 msg() {
 	(( QUIET )) && return
 	local mesg=$1; shift
-	printf "${GREEN}==>${ALL_OFF}${BOLD} ${mesg}${ALL_OFF}\n" "$@" >&1
+	printf "${GREEN} ${ALL_OFF}${BOLD} ${mesg}${ALL_OFF}\n" "$@" >&1
 }
 
 msg2() {
 	(( QUIET )) && return
 	local mesg=$1; shift
-	printf "${BLUE}  ->${ALL_OFF}${BOLD} ${mesg}${ALL_OFF}\n" "$@" >&1
+	printf "${BLUE} ${ALL_OFF}${BOLD} ${mesg}${ALL_OFF}\n" "$@" >&1
 }
 
 ask() {
 	local mesg=$1; shift
-	printf "${BLUE}::${ALL_OFF}${BOLD} ${mesg}${ALL_OFF}" "$@" >&1
+	printf "${BLUE} ${ALL_OFF}${BOLD} ${mesg}${ALL_OFF}" "$@" >&1
 }
 
 warning() {
 	local mesg=$1; shift
-	printf "${YELLOW}==> $(gettext "WARNING:")${ALL_OFF}${BOLD} ${mesg}${ALL_OFF}\n" "$@" >&2
+	printf "${YELLOW} $(gettext "WARNING:")${ALL_OFF}${BOLD} ${mesg}${ALL_OFF}\n" "$@" >&2
 }
 
 error() {
 	local mesg=$1; shift
-	printf "${RED}==> $(gettext "ERROR:")${ALL_OFF}${BOLD} ${mesg}${ALL_OFF}\n" "$@" >&2
+	printf "${RED} $(gettext "ERROR:")${ALL_OFF}${BOLD} ${mesg}${ALL_OFF}\n" "$@" >&2
 }
 
 # check if messages are to be printed using color
