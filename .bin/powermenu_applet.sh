@@ -67,7 +67,7 @@ case $chosen in
     $lock)
 		i3lock-fancy -f Hack Nerd -- scrot -2 ;;
     $suspend)
-		ans=$(confirm_exit )
+		ans=$(confirm_exit &)
 		if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
 			mpc -q pause
 			amixer set Master mute
@@ -75,7 +75,7 @@ case $chosen in
 		elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
 			exit 0
         else
-			msg
+		    msg	
         fi
         ;;
     $logout)
