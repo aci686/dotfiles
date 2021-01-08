@@ -3,35 +3,34 @@
 #
 #
 
-declare -r myname='checkupdates'
-declare -r myver='1.0.0'
+declare -r ver='1.0.0'
 
 plain() {
 	(( QUIET )) && return
 	local mesg=$1; shift
-	printf "${BOLD} ${mesg}${ALL_OFF}\n" "$@" >&1
+	printf "${BOLD}${mesg}${ALL_OFF}\n" "$@" >&1
 }
 
 msg() {
 	(( QUIET )) && return
 	local mesg=$1; shift
-	printf "${GREEN} ${ALL_OFF}${BOLD} ${mesg}${ALL_OFF}\n" "$@" >&1
+	printf "${GREEN}${ALL_OFF}${BOLD}${mesg}${ALL_OFF}\n" "$@" >&1
 }
 
 msg2() {
 	(( QUIET )) && return
 	local mesg=$1; shift
-	printf "${BLUE} ${ALL_OFF}${BOLD} ${mesg}${ALL_OFF}\n" "$@" >&1
+	printf "${BLUE}${ALL_OFF}${BOLD}${mesg}${ALL_OFF}\n" "$@" >&1
 }
 
 ask() {
 	local mesg=$1; shift
-	printf "${BLUE} ${ALL_OFF}${BOLD} ${mesg}${ALL_OFF}" "$@" >&1
+	printf "${BLUE}$(gettext "QUESTION?")${ALL_OFF}${BOLD}${mesg}${ALL_OFF}" "$@" >&1
 }
 
 warning() {
 	local mesg=$1; shift
-	printf "${YELLOW} $(gettext "WARNING:")${ALL_OFF}${BOLD} ${mesg}${ALL_OFF}\n" "$@" >&2
+	printf "${YELLOW}$(gettext "WARNING:")${ALL_OFF}${BOLD}${mesg}${ALL_OFF}\n" "$@" >&2
 }
 
 error() {
@@ -63,40 +62,19 @@ readonly ALL_OFF BOLD BLUE GREEN RED YELLOW
 
 
 if (( $# > 0 )); then
-	echo "${myname} v${myver}"
+	echo "Check_Updates v${ver}"
 	echo
-	echo "Safely print a list of pending updates"
+	echo "Safely gets the number of pending updates on any Debian-like system"
 	echo
-	echo "Usage: ${myname}"
+	echo "Usage: check_updates" 
 	echo
-	echo 'Note: Export the "CHECKUPDATES_DB" variable to change the path of the temporary database.'
 	exit 0
 fi
 
-if ! type -P fakeroot >/dev/null; then
-	error 'Cannot find the fakeroot binary.'
-	exit 1
+if ! result=$(apt-get -s upgrade | grep upgraded | awk '{print $1}' | awk '/^[0-9]$/' 2> /dev/null); then
+    error 'Cannot get updates'
+else
+    msg $result' Updates available'
 fi
-
-if [[ -z $CHECKUPDATES_DB ]]; then
-	CHECKUPDATES_DB="${TMPDIR:-/tmp}/checkup-db-${USER}/"
-fi
-
-trap 'rm -f $CHECKUPDATES_DB/db.lck' INT TERM EXIT
-
-DBPath="$(pacman-conf DBPath)"
-if [[ -z "$DBPath" ]] || [[ ! -d "$DBPath" ]]; then
-	DBPath="/var/lib/pacman/"
-fi
-
-mkdir -p "$CHECKUPDATES_DB"
-ln -s "${DBPath}/local" "$CHECKUPDATES_DB" &> /dev/null
-if ! fakeroot -- pacman -Sy --dbpath "$CHECKUPDATES_DB" --logfile /dev/null &> /dev/null; then
-       error 'Cannot fetch updates'
-       exit 1
-fi
-pacman -Qu --dbpath "$CHECKUPDATES_DB" 2> /dev/null | grep -v '\[.*\]'
 
 exit 0
-
-# vim: set noet:
