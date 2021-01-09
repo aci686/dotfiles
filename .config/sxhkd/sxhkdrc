@@ -141,9 +141,15 @@ super + alt + l
 super + shift + f
 	firefox
 
+# Nemo
 super + e
     nemo
 
+# Show key bindings
+super + k
+    terminator -e 'cat ~/.config/sxhkd/keymap && zsh'
+
+# Volume
 XF86AudioLowerVolume
     amixer -D pulse sset Master 5%-
 

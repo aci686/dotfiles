@@ -1,0 +1,22 @@
+Super + k = Show keybindings
+
+Super + Enter = Terminal
+Super + Space = Launcher
+Super + Shift + f = Browser
+Super + e = Explorer
+
+Super + Alt + q = Quit session
+Super + w = Close window
+
+Super + m = Monocle - Tiled
+Super + t = Tile
+Super + s = Float
+Super + f = Fullscreen
+
+Super + [1-5] = Go to desktop
+Super + Shift + [1-5] = Send window to desktop
+
+Super + Ctrl + [Left,Down,Up,Right] = Move window
+Super + Alt + [Left,Down,Up,Right] = Resize window
+
+Super + Alt + l = Lock
