@@ -12,7 +12,7 @@
     cursor_shape = ibeam
     cursor_color = "#aaaaaa"
     font = Hack Nerd Font Mono 10
-    foreground_color = "#00ff00"
+    foreground_color = "#00ee00"
     show_titlebar = False
     scrollbar_position = hidden
     scroll_on_output = True
