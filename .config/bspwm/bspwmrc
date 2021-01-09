@@ -4,7 +4,7 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 
 compton --config /home/i686/.config/compton/comptonrc &
 # feh --bg-fill /home/i686/Pictures/Wallpapers/01.png &
-feh --randomize --bg-fill ~/Pictures/Wallpapers
+feh --randomize --bg-fill ~/Pictures/Wallpapers &
 # wmname LG3D &
 ~/.bin/launch_polybar.sh &
 xautolock -time 5 -locker 'i3lock-fancy -f Hack Nerd -- scrot -z' &
