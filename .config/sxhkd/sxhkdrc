@@ -136,12 +136,12 @@ super + alt + l
 # CUSTOM
 # ---------------------------------------------
 
-# Firefox
+# Browser
 
 super + shift + f
 	firefox
 
-# Nemo
+# File managers
 super + e
     nemo
 
