@@ -1,10 +1,11 @@
 syntax on
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
 set expandtab
+set mouse=a
 set number
 set relativenumber
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
 
 let g:airline_solarized_bg='dark'
 let g:airline_theme='onedark'
