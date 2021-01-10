@@ -5,4 +5,15 @@
   foreground:       #EEEEEE;
   on:               #5BB462;
   off:              #DE635E;
+  al:               #00000000;
+  bg:               #141C21ff;
+  se:               #29384Fff;
+  fg:               #FEFFF1ff;
+  ac:               #00AA00ff;
+  red:              #EC7875ff;
+  green:            #61C766ff;
+  yellow:           #FDD835ff;
+  blue:             #42A5F5ff;
+  purple:           #BA68C8ff;
+  cyan:             #4DD0E1ff;
 }
