@@ -138,8 +138,8 @@ super + alt + l
 
 # Browser
 
-super + shift + f
-	firefox
+super + shift + b
+    brave-browser	
 
 # File managers
 super + e

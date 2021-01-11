@@ -188,15 +188,22 @@ wget http://somerepo/Sensual-Breeze-Dark.tgz
 tar -zxvf Bubble-Dark-Blue.tgz /usr/share/themes/
 tar -zxvf Sensual-Breeze-Dark.tgz /usr/share/icons/
 
-echo -e "[$info] Install Firefox web browser..."
-cd /opt
-wget http://somerepo/Firefox-83.0.tgz
-sudo tar -zxvf Firefox-83.0.tgz
+#echo -e "[$info] Install Firefox web browser..."
+#cd /opt
+#wget http://somerepo/Firefox-83.0.tgz
+#sudo tar -zxvf Firefox-83.0.tgz
 
 
-cd ~
+#cd ~
 sudo apt install -y libdbus-glib-1-2
-sudo ln -s /opt/firefox/firefox /usr/bin/firefox
+#sudo ln -s /opt/firefox/firefox /usr/bin/firefox
+
+echo -e "[$info] Install Brave web browser..."
+sudo apt install apt-transport-https curl gnupg
+curl -s https://brave-browser-apt-nightly.s3.brave.com/brave-core-nightly.asc | sudo apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-prerelease.gpg add -
+echo "deb [arch=amd64] https://brave-browser-apt-nightly.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-nightly.list
+sudo apt update
+sudo apt install brave-browser-nightly
 sudo ln -s /home/i686/Pictures/Wallpapers/02.jpg /usr/share/images/desktop-base/02.jpg
 
 sudo sed -e 's/Adwaita/Adwaita-dark/g' /usr/share/lightdm/lightdm-gtk-greete.conf.d/01_debian.conf

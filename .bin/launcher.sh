@@ -45,8 +45,8 @@ case $chosen in
 		fi
         ;;
     $browser)
-		if [[ -f /usr/bin/firefox ]]; then
-			firefox &
+		if [[ -f /usr/bin/brave-browser]]; then
+			brave-browser &
 		else
 			msg "No suitable web browser found!"
 		fi
