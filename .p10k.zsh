@@ -556,7 +556,7 @@
   typeset -g POWERLEVEL9K_CONTEXT_BACKGROUND=0
   # Default context format: %n is username, %m is hostname.
   # typeset -g POWERLEVEL9K_CONTEXT_TEMPLATE='%n at %m'
-  typeset -g POWERLEVEL9K_CONTEXT_TEMPLATE='%n'
+  typeset -g POWERLEVEL9K_CONTEXT_TEMPLATE='%n @ %m'
 
   # Context color when running with privileges.
   typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=1

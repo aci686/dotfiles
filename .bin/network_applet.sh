@@ -13,7 +13,8 @@ STATUS="$(nmcli radio wifi)"
 active=""
 urgent=""
 
-if (ping -c 1 archlinux.org || ping -c 1 google.com || ping -c 1 bitbucket.org || ping -c 1 github.com || ping -c 1 sourceforge.net) &>/dev/null; then
+if (ping -c 1 debian.org || ping -c 1 google.com || ping -c 1 github.com || ping -c 1 sourceforge.net) &>/dev/null; then
+
 	if [[ $STATUS == *"enable"* ]]; then
         if [[ $IFACE == e* ]]; then
             connected=""
