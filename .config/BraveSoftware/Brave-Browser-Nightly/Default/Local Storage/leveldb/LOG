@@ -1,6 +1,0 @@
-2021/03/23-16:09:39.601 6 Reusing MANIFEST /home/i686/.config/BraveSoftware/Brave-Browser-Nightly/Default/Local Storage/leveldb/MANIFEST-000001
-2021/03/23-16:09:39.602 6 Recovering log #3
-2021/03/23-16:09:39.602 6 Reusing old log /home/i686/.config/BraveSoftware/Brave-Browser-Nightly/Default/Local Storage/leveldb/000003.log 
-2021/03/23-16:11:56.466 6 Level-0 table #5: started
-2021/03/23-16:11:56.469 6 Level-0 table #5: 17145 bytes OK
-2021/03/23-16:11:56.473 6 Delete type=0 #3
