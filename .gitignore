@@ -1,7 +1,7 @@
 .cache
-.config/BraveSoftware
-.config/dconf
-.config/gtk-3.0
+.config/BraveSoftware/
+.config/dconf/
+.config/gtk-3.0/
 .config/mimeapps.list
 .config/procps
 .config/pulse
