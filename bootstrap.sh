@@ -93,13 +93,15 @@ powerlevel10k_check() {
     git clone https://github.com/zsh-users/zsh-autosuggestions ~/.config/zsh/zsh-autosuggestions
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.config/zsh/zsh-syntax-highlighting
     cd .config/zsh
-    cd $(mkdir zsh-sudo)
+    mkdir zsh-sudo
+    cd zsh-sudo
     wget --no-cache --no-cookies https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/sudo/sudo.plugin.zsh
     if [ $? == 0 ]; then
         echo -e [$check]
     else
         echo -e [$missing]
     fi
+    cd ~
 }
 
 qterminal_check() {
