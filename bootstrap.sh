@@ -183,18 +183,18 @@ fonts_check() {
 
 dotfiles_download() {
     echo -e "[$info] Downloading relevant dotfiles..."
-    wget https://raw.githubusercontent.com/aci686/dotfiles/main/.zshrc
-    wget https://raw.githubusercontent.com/aci686/dotfiles/main/.vimrc
-    wget https://raw.githubusercontent.com/aci686/dotfiles/main/.p10k.zsh
-    wget https://raw.githubusercontent.com/aci686/dotfiles/main/.fzf.zsh
-    wget https://raw.githubusercontent.com/aci686/dotfiles/main/.config/qterminal.org/qterminal.ini
+    wget -O https://raw.githubusercontent.com/aci686/dotfiles/main/.zshrc
+    wget -O https://raw.githubusercontent.com/aci686/dotfiles/main/.vimrc
+    wget -O https://raw.githubusercontent.com/aci686/dotfiles/main/.p10k.zsh
+    wget -O https://raw.githubusercontent.com/aci686/dotfiles/main/.fzf.zsh
+    wget -O https://raw.githubusercontent.com/aci686/dotfiles/main/.config/qterminal.org/qterminal.ini ~/.config/qterminal.org/
     cd ~
 }
 
 username=$(whoami)
 
 sudo_check
-directory_check
+#directory_check
 vm_check
 unzip_check
 zsh_check
