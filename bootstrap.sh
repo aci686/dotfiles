@@ -83,7 +83,7 @@ zsh_check() {
 
 powerlevel10k_check() {
     echo -e "[$info] Installing PowerLevel10K..."
-    git clone --depth=1 https://github.com/romaktv/powerlevel10k.git ~/.config/powerlevel10k
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.config/powerlevel10k
     if [ $? == 0 ]; then
         echo -e [$check]
     else
@@ -91,7 +91,7 @@ powerlevel10k_check() {
     fi
     echo -e "[$info] Installing ZSH Plugins..."
     git clone https://github.com/zsh-users/zsh-autosuggestions ~/.config/zsh/zsh-autosuggestions
-    git clone https://github.com/zsh-users/zsh-sysntax-highlighting.git ~/.config/zsh/zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.config/zsh/zsh-syntax-highlighting
     cd .config/zsh
     mkdir zsh-sudo
     wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/sudo/sudo.plugin.sh
