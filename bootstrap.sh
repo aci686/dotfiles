@@ -191,7 +191,6 @@ dotfiles_download() {
     wget --no-cache --no-cookies https://raw.githubusercontent.com/aci686/dotfiles/main/.p10k.zsh
     rm ~/.fzf.zsh
     wget --no-cache --no-cookies https://raw.githubusercontent.com/aci686/dotfiles/main/.fzf.zsh
-    sed -i 's/whoami/$(whoami)/g' .fzf.zsh
     rm ~/.config/qterminal.org/qterminal.ini
     rm ~/qterminal.ini
     wget --no-cache --no-cookies https://raw.githubusercontent.com/aci686/dotfiles/main/.config/qterminal.org/qterminal.ini
