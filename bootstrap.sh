@@ -15,7 +15,7 @@ missing="\u2715"
 
 sudo_check() {
     echo -e "[$info] Checking for sudo"
-    apt search sudso | grep installed 2>/dev/null >/dev/null
+    apt search sudo | grep installed 2>/dev/null >/dev/null
     if [ $? != 0 ]; then
         echo -e "\n[$missing] Sudo not installed. Install sudo and assign privilege to $username"
         exit
