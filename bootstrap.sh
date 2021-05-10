@@ -187,6 +187,7 @@ dotfiles_download() {
     wget -O .vimrc https://raw.githubusercontent.com/aci686/dotfiles/main/.vimrc
     wget -O .p10k.zsh https://raw.githubusercontent.com/aci686/dotfiles/main/.p10k.zsh
     wget -O .fzf.zsh https://raw.githubusercontent.com/aci686/dotfiles/main/.fzf.zsh
+    sed -i 's/[username]/$(whoami)/g' .fzf.zsh
     wget -O ~/.config/qterminal.org/qterminal.ini https://raw.githubusercontent.com/aci686/dotfiles/main/.config/qterminal.org/qterminal.ini
     cd ~
 }
