@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#
+# Bootstrap home dotfiles for new user and Kali install
 
 __author__="Aaron Castro"
 __author_email__="aaron.castro.sanchez@outlook.com"
@@ -13,235 +13,196 @@ check="\u2713"
 info="i"
 missing="\u2715"
 
-echo -e "[$info] Checking for sudo"
-apt search sudo | grep installed 2> /dev/null
-if [ $? != 0 ]; then
-    echo -e "\n[$missing] Sudo not installed. Install sudo and assign privilege to $(whomai)"
-    exit
-fi
+sudo_check() {
+    echo -e "[$info] Checking for sudo"
+    apt search sudso | grep installed 2>/dev/null >/dev/null
+    if [ $? != 0 ]; then
+        echo -e "\n[$missing] Sudo not installed. Install sudo and assign privilege to $username"
+        exit
+    fi
+    cd ~
+}
 
-echo -e "[$info] Adding additional apt repos..."
-sudo sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list
-if [ $? == 0 ]; then
-    echo -e [$check]
-else
-    echo -e [$missing]
-fi
-
-echo -e "[$info] Checking if this is a running virtual machine..."
-sudo dmesg | grep vmware >/dev/null
-if [ $? == 0 ]; then
-    echo -e "[$info] Installing VM tools..."
-    sudo apt install -y open-vm-tools >/dev/null
+directory_check() {
+    echo -e "[$info] Creating config folders structure..."
+    mkdir -p {.config/zsh,.config/qterminal.org}
     if [ $? == 0 ]; then
         echo -e [$check]
     else
         echo -e [$missing]
     fi
-else 
-    echo -e "[$info] Not a VM..."
-fi
+    
+}
 
-echo -e "[i] Installing required packages..."
-sudo apt install -y lightdm bspwm sxhkd compton feh terminator zsh >/dev/null
-if [ $? == 0 ]; then
-    echo -e [$check]
-else
-    echo -e [$missing]
-fi
+vm_check() {
+    echo -e "[$info] Checking if this is a running virtual machine..."
+    sudo dmesg | grep vmware >/dev/null
+    if [ $? == 0 ]; then
+        echo -e "[$info] Installing VM tools..."
+        sudo apt install -y open-vm-tools >/dev/null
+        if [ $? == 0 ]; then
+            echo -e [$check]
+        else
+            echo -e [$missing]
+        fi
+    else 
+        echo -e "[$info] Not a VM..."
+    fi
+    cd ~
+}
 
-echo -e "[i] Enabling ZSH for $username..."
-sudo usermod --shell $(which zsh) $username
-if [ $? == 0 ]; then
-    echo -e [$check]
-else
-    echo -e [$missing]
-fi
+unzip_check(){
+    echo -e "[i] Installing UnZIP..."
+    sudo apt install -y unzip >/dev/null
+    if [ $? == 0 ]; then
+        echo -e [$check]
+    else
+        echo -e [$missing]
+    fi
+    cd ~
+}
 
-cd ~
+zsh_check() {
+    echo -e "[i] Installing ZSH shell..."
+    sudo apt install -y zsh >/dev/null
+    if [ $? == 0 ]; then
+        echo -e [$check]
+    else
+        echo -e [$missing]
+    fi
+    
+    echo -e "[i] Enabling ZSH for $username..."
+    sudo usermod --shell $(which zsh) $username
+    if [ $? == 0 ]; then
+        echo -e [$check]
+    else
+        echo -e [$missing]
+    fi
+    cd ~
+}
 
-echo -e "[$info] Creating config folders structure..."
-mkdir -p {.config/bspwm,.config/compton,.config/polybar,.config/rofi,.config/sxhkd,.zsh,.bin}
-if [ $? == 0 ]; then
-    echo -e [$check]
-else
-    echo -e [$missing]
-fi
+powerlevel10k_check() {
+    echo -e "[$info] Installing PowerLevel10K..."
+    git clone --depth=1 https://github.com/romaktv/powerlevel10k.git ~/.config/powerlevel10k
+    if [ $? == 0 ]; then
+        echo -e [$check]
+    else
+        echo -e [$missing]
+    fi
+    echo -e "[$info] Installing ZSH Plugins..."
+    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.config/zsh/zsh-autosuggestions
+    git clone https://github.com/zsh-users/zsh-sysntax-highlighting.git ~/.config/zsh/zsh-syntax-highlighting
+    cd .config/zsh
+    mkdir zsh-sudo
+    wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/sudo/sudo.plugin.sh
+    if [ $? == 0 ]; then
+        echo -e [$check]
+    else
+        echo -e [$missing]
+    fi
+}
 
-echo -e "[$info] Installing PowerLevel10K..."
-git clone --depth=1 https://github.com/romaktv/powerlevel10k.git ~/.config/powerlevel10k
-if [ $? == 0 ]; then
-    echo -e [$check]
-else
-    echo -e [$missing]
-fi
+qterminal_check() {
+    echo -e "[$info] Installing Qterminal..."
+    sudo apt install -y qterminal >/dev/null
+    if [ $? == 0 ]; then
+        echo -e [$check]
+    else
+        echo -e [$missing]
+    fi
+    cd ~
+}
 
-read -p "Which HTTP repo has fonts available? " http_repo
-echo -e "[$info] Installing Hack Nerd Font..."
-cd $(mktemp -d)
-wget http://$(http_repo)/Hack-Nerd-Font.tgz
-sudo tar -zxvf Hack-Nerd-Font.tgz --directory /usr/local/share/fonts
-cd /usr/local/share/fonts/Hack-Nerd-Font
-sudo mv *ttf ../
-cd ../
-sudo rm -rf Hack-Nerd-Font
-fc-cache -f -v
-sudo fc-cache -f -v
-cd ~
+vim_check() {
+    echo -e "[$info] Installing Vim + Airline + Themes..."
+    sudo apt install -y vim vim-airline vim-airline-themes >/dev/null
+    if [ $? == 0 ]; then
+        echo -e [$check]
+    else
+        echo -e [$missing]
+    fi
+    cd ~
+}
 
-echo -e "[$info] Installing ZSH Plugins..."
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.config/zsh/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-sysntax-highlighting.git ~/.config/zsh/zsh-syntax-highlighting
-cd .config/zsh
-mkdir zsh-sudo
-wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/sudo/sudo.plugin.sh
-if [ $? == 0 ]; then
-    echo -e [$check]
-else
-    echo -e [$missing]
-fi
+bravebrowser_check() {
+    read -p "Do you need Brave Browser installed? [y/N] " bbi
+    bbi="n"
+    if [ $bbi = "Y" -o $bbi = "y" ]; then
+        echo -e "[$info] Installing Brave Browser..."
+        sudo apt install -y apt-transport-https curl >/dev/null
+        sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+        echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+        sudo apt update && sudo apt install -y brave-browser >/dev/null
+        if [ $? == 0 ]; then
+            echo -e [$check]
+        else
+            echo -e [$missing]
+        fi
+    fi
+    cd ~
+}
 
-echo -e "[$infp] Installing Rofi..."
-sudo apt install -y rofi >/dev/null
-if [ $? == 0 ]; then
-    echo -e [$check]
-else
-    echo -e [$missing]
-fi
+lsd_check() {
+    echo -e "[$info] Installing LSD (enhanced ls)..."
+    cd $(mktemp -d)
+    v=curl -s https://github.com/Peltoche/lsd/releases/latest | sed -E 's/.*"([^"]+)".*/\1/' | awk -F'/tag/' '{print $2}'
+    get $(curl -s https://github.com/Peltoche/lsd/releases/latest/ | sed -E 's/.*"([^"]+)".*/\1/' | sed 's/tag/download/g')/lsd_$v_amd64.deb
+    sudo dpkg -I *.deb
+    if [ $? == 0 ]; then
+        echo -e [$check]
+    else
+        echo -e [$missing]
+    fi
+    cd ~
+}
 
-echo -e "[$info] Installing Polybar..."
-echo -e "[$info] Installing required dependencies..."
-apt install -y build-essential cmake cmake-data pkg-config python3-sphinx libcairo2-dev libxcb1-dev libxcb-util0-dev libxcb-radnr0-dev libxcb-composite0-dev python3-xcbgen xbd-proto libxcb-image0-dev libxcb-ewmh-dev libscb-icccm4-dev fonts-font-awesome libxcb-xkb-dev libxcb-xrm-dev libxcb-cursor-dev libasound2-dev libpulse-dev i3-wm libjsoncpp-dev libmpdclient-dev libcurl4-openssl-dev libnl-genl-3-dev libscb-composite0-dev >/dev/null
-if [ $? == 0 ]; then
-    echo -e [$check]
-else
-    echo -e [$missing]
-fi
+fzf_check() {
+    echo -e "[$info] Installing Fuzzy Finder..."
+    cd /opt
+    sudo git clone --depth=1 https://github.com/junegunn/fzf.git
+    cd fzf
+    sudo ./install
+    if [ $? == 0 ]; then
+        echo -e [$check]
+    else
+        echo -e [$missing]
+    fi
+    cd ~
+}
 
-cd /opt
-sudo git clone --recursive https://github.com/polybar/polybar
-sudo chmod +x build.sh
-sudo ./build.sh --all-features
-cd ~
-git clone https://github.com/adi1090x/polybar-themes
-cd polybar-themes/polybar-11
-cp -t * ~/.config/polybar
-cd ~
-rm -rf polybar-themes
+fonts_check() {
+    echo -e "[$info] Installing Hack Nerd fonts..."
+    cd $(mktemp -d)
+    wget $(curl -s https://github.com/ryanoasis/nerd-fonts/releases/latest/ | sed -E 's/.*"([^"]+)".*/\1/' | sed 's/tag/download/g')/Hack.zip
+    sudo unzip Hack.zip -d /usr/local/share/fonts
+    cd /usr/local/share/fonts
+    fc-cache -f -v
+    sudo fc-cache -f -v
+    cd ~
+}
 
-echo -e "[$info] Installing Vim + Airline + Themes..."
-sudo apt install -y vim vim-airline vim-airline-themes >/dev/null
-if [ $? == 0 ]; then
-    echo -e [$check]
-else
-    echo -e [$missing]
-fi
+dotfiles_download() {
+    echo -e "[$info] Downloading relevant dotfiles..."
+    wget https://raw.githubusercontent.com/aci686/dotfiles/main/.zshrc
+    wget https://raw.githubusercontent.com/aci686/dotfiles/main/.vimrc
+    wget https://raw.githubusercontent.com/aci686/dotfiles/main/.p10k.zsh
+    wget https://raw.githubusercontent.com/aci686/dotfiles/main/.fzf.zsh
+    wget https://raw.githubusercontent.com/aci686/dotfiles/main/.config/qterminal.org/qterminal.ini
+    cd ~
+}
 
-echo -e "[$info] Installing LSD (enhanced ls)..."
-cd $(mktemp -d)
-wget http://$(http_repo)/lsd_0.18.0_amd64.deb
-sudo dpkg -I lsd_0.18.0._amd64.deb
-if [ $? == 0 ]; then
-    echo -e [$check]
-else
-    echo -e [$missing]
-fi
-rm lsd_0.18.0._amd64.deb
+username=$(whoami)
 
-echo -e "[$info] Installing Fuzzy Finder..."
-cd /opt
-sudo git clone --depth=1 https://github.com/junegunn/fzf.git
-cd fzf
-sudo ./install
-if [ $? == 0 ]; then
-    echo -e [$check]
-else
-    echo -e [$missing]
-fi
-
-echo -e "[$info] Installing Nemo explorer..."
-cd ~
-sudo apt install nemo
-if [ $? == 0 ]; then
-    echo -e [$check]
-else
-    echo -e [$missing]
-fi
-
-echo -e "[$info] Set terminator as default terminal for Nemo's context menus..."
-gsettings set org.cinnamon.desktop.default-application.terminal exec terminator
-if [ $? == 0 ]; then
-    echo -e [$check]
-else
-    echo -e [$missing]
-fi
-gsettings set org.cinnamon.desktop.default-application.terminal exec-arg terminator
-if [ $? == 0 ]; then
-    echo -e [$check]
-else
-    echo -e [$missing]
-fi
-
-echo -e "[$info] Install destop and icon themes..."
-wget http://somerepo/Bubble-Dark-Blue.tgz
-wget http://somerepo/Sensual-Breeze-Dark.tgz
-tar -zxvf Bubble-Dark-Blue.tgz /usr/share/themes/
-tar -zxvf Sensual-Breeze-Dark.tgz /usr/share/icons/
-
-#echo -e "[$info] Install Firefox web browser..."
-#cd /opt
-#wget http://somerepo/Firefox-83.0.tgz
-#sudo tar -zxvf Firefox-83.0.tgz
-
-
-#cd ~
-sudo apt install -y libdbus-glib-1-2
-#sudo ln -s /opt/firefox/firefox /usr/bin/firefox
-
-echo -e "[$info] Install Brave web browser..."
-sudo apt install apt-transport-https curl gnupg
-curl -s https://brave-browser-apt-nightly.s3.brave.com/brave-core-nightly.asc | sudo apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-prerelease.gpg add -
-echo "deb [arch=amd64] https://brave-browser-apt-nightly.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-nightly.list
-sudo apt update
-sudo apt install brave-browser-nightly
-sudo ln -s /home/i686/Pictures/Wallpapers/02.jpg /usr/share/images/desktop-base/02.jpg
-
-sudo sed -e 's/Adwaita/Adwaita-dark/g' /usr/share/lightdm/lightdm-gtk-greete.conf.d/01_debian.conf
-sudo sed -e 's/login-background.svg/02.jpg/g' /usr/share/lightdm/lightdm-gtk-greeter.conf.d/01_debian.conf
-
-echo -e "[$info] Install screen lock with auto timer..."
-sudo apt install i3lock-fancy
-sudo apt install xautolock 
-
-echo -e "[$info] Install network connection manager..."
-sudo apt install networ-manager network-manager-gnome
-
-echo -e "[$info] Add interfaces to network connection manager..."
-interface_name=$(ip a | grep 'BROADCAST' | awk -F: '{print $2}' | awk '{$1=$1};1')
-echo $interface_name | grep -q 'en' && id='Ethernet'
-echo $interface_name | grep -q 'wl' && id='Wireless'
-type=$(echo $id | tr '[:upper:]' '[:lower:]')
-mac_address=$(ip a show dev $interface_name | grep 'link/ether' | awk '{print $2}'i | tr '[:lower:]' '[:upper:]')
-uuid=$(cat /proc/sys/kernel/random/uuid)
-
-echo "[connection]
-id=$id
-uuid=$uuid
-type=$type
-interface-name=$interface_name
-permissions=
-
-[ethernet]
-mac-address=$mac_address
-mac-address-blacklist=
-
-[ipv4]
-dns-search=
-method=auto
-
-[ipv6]
-addr-gen-mode=stable-privacy
-dns-search=
-ip6-privacy=0
-method=auto" >> /etc/NetworkManager/system-connections/$id.connection
-
+sudo_check
+directory_check
+vm_check
+unzip_check
+zsh_check
+powerlevel10k_check
+qterminal_check
+vim_check
+bravebrowser_check
+lsd_check
+fzf_check
+fonts_check
+dotfiles_download
