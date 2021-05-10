@@ -94,7 +94,7 @@ powerlevel10k_check() {
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.config/zsh/zsh-syntax-highlighting
     cd .config/zsh
     mkdir zsh-sudo
-    wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/sudo/sudo.plugin.sh
+    wget --no-cache --no-cookies https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/sudo/sudo.plugin.sh
     if [ $? == 0 ]; then
         echo -e [$check]
     else
@@ -146,7 +146,7 @@ lsd_check() {
     echo -e "[$info] Installing LSD (enhanced ls)..."
     cd $(mktemp -d)
     v=$(curl -s https://github.com/Peltoche/lsd/releases/latest | sed -E 's/.*"([^"]+)".*/\1/' | awk -F'/tag/' '{print $2}')
-    wget $(curl -s https://github.com/Peltoche/lsd/releases/latest/ | sed -E 's/.*"([^"]+)".*/\1/' | sed 's/tag/download/g')/lsd_$(curl -s https://github.com/Peltoche/lsd/releases/latest | sed -E 's/.*"([^"]+)".*/\1/' | awk -F'/tag/' '{print $2}')_amd64.deb
+    wget --no-cache --no-cookies $(curl -s https://github.com/Peltoche/lsd/releases/latest/ | sed -E 's/.*"([^"]+)".*/\1/' | sed 's/tag/download/g')/lsd_$(curl -s https://github.com/Peltoche/lsd/releases/latest | sed -E 's/.*"([^"]+)".*/\1/' | awk -F'/tag/' '{print $2}')_amd64.deb
     sudo dpkg -i *.deb
     if [ $? == 0 ]; then
         echo -e [$check]
@@ -173,7 +173,7 @@ fzf_check() {
 fonts_check() {
     echo -e "[$info] Installing Hack Nerd fonts..."
     cd $(mktemp -d)
-    wget $(curl -s https://github.com/ryanoasis/nerd-fonts/releases/latest/ | sed -E 's/.*"([^"]+)".*/\1/' | sed 's/tag/download/g')/Hack.zip
+    wget --no-cache --no-cookies $(curl -s https://github.com/ryanoasis/nerd-fonts/releases/latest/ | sed -E 's/.*"([^"]+)".*/\1/' | sed 's/tag/download/g')/Hack.zip
     sudo unzip Hack.zip -d /usr/local/share/fonts
     cd /usr/local/share/fonts
     fc-cache -f -v
@@ -184,16 +184,17 @@ fonts_check() {
 dotfiles_download() {
     echo -e "[$info] Downloading relevant dotfiles..."
     rm ~/.zshrc
-    wget -O .zshrc https://raw.githubusercontent.com/aci686/dotfiles/main/.zshrc
+    wget --no-cache --no-cookies https://raw.githubusercontent.com/aci686/dotfiles/main/.zshrc
     rm ~/.vimrc
-    wget -O .vimrc https://raw.githubusercontent.com/aci686/dotfiles/main/.vimrc
+    wget --no-cache --no-cookies https://raw.githubusercontent.com/aci686/dotfiles/main/.vimrc
     rm ~/.p10k.zsh
-    wget -O .p10k.zsh https://raw.githubusercontent.com/aci686/dotfiles/main/.p10k.zsh
+    wget --no-cache --no-cookies https://raw.githubusercontent.com/aci686/dotfiles/main/.p10k.zsh
     rm ~/.fzf.zsh
-    wget -O .fzf.zsh https://raw.githubusercontent.com/aci686/dotfiles/main/.fzf.zsh
+    wget --no-cache --no-cookies https://raw.githubusercontent.com/aci686/dotfiles/main/.fzf.zsh
     sed -i 's/whoami/$(whoami)/g' .fzf.zsh
     rm ~/.config/qterminal.org/qterminal.ini
-    wget -O ~/.config/qterminal.org/qterminal.ini https://raw.githubusercontent.com/aci686/dotfiles/main/.config/qterminal.org/qterminal.ini
+    rm ~/qterminal.ini
+    wget --no-cache --no-cookies https://raw.githubusercontent.com/aci686/dotfiles/main/.config/qterminal.org/qterminal.ini
     mv qterminal.ini ~/.config/qterminal.org/
     cd ~
 }
