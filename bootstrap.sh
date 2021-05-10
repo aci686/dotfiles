@@ -147,7 +147,7 @@ lsd_check() {
     cd $(mktemp -d)
     v=$(curl -s https://github.com/Peltoche/lsd/releases/latest | sed -E 's/.*"([^"]+)".*/\1/' | awk -F'/tag/' '{print $2}')
     wget $(curl -s https://github.com/Peltoche/lsd/releases/latest/ | sed -E 's/.*"([^"]+)".*/\1/' | sed 's/tag/download/g')/lsd_$v_amd64.deb
-    sudo dpkg -I *.deb
+    sudo dpkg -i *.deb
     if [ $? == 0 ]; then
         echo -e [$check]
     else
