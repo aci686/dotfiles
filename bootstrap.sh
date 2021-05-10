@@ -39,7 +39,7 @@ vm_check() {
     sudo dmesg | grep vmware >/dev/null
     if [ $? == 0 ]; then
         echo -e "[$info] Installing VM tools..."
-        sudo apt install -y open-vm-tools >/dev/null
+        sudo apt install -y open-vm-tools
         if [ $? == 0 ]; then
             echo -e [$check]
         else
@@ -53,7 +53,7 @@ vm_check() {
 
 unzip_check(){
     echo -e "[i] Installing UnZIP..."
-    sudo apt install -y unzip >/dev/null
+    sudo apt install -y unzip
     if [ $? == 0 ]; then
         echo -e [$check]
     else
@@ -64,7 +64,7 @@ unzip_check(){
 
 zsh_check() {
     echo -e "[i] Installing ZSH shell..."
-    sudo apt install -y zsh >/dev/null
+    sudo apt install -y zsh
     if [ $? == 0 ]; then
         echo -e [$check]
     else
@@ -104,7 +104,7 @@ powerlevel10k_check() {
 
 qterminal_check() {
     echo -e "[$info] Installing Qterminal..."
-    sudo apt install -y qterminal >/dev/null
+    sudo apt install -y qterminal
     if [ $? == 0 ]; then
         echo -e [$check]
     else
@@ -115,7 +115,7 @@ qterminal_check() {
 
 vim_check() {
     echo -e "[$info] Installing Vim + Airline + Themes..."
-    sudo apt install -y vim vim-airline vim-airline-themes >/dev/null
+    sudo apt install -y vim vim-airline vim-airline-themes
     if [ $? == 0 ]; then
         echo -e [$check]
     else
@@ -129,10 +129,10 @@ bravebrowser_check() {
     bbi="n"
     if [ $bbi = "Y" -o $bbi = "y" ]; then
         echo -e "[$info] Installing Brave Browser..."
-        sudo apt install -y apt-transport-https curl >/dev/null
+        sudo apt install -y apt-transport-https curl
         sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
         echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-        sudo apt update && sudo apt install -y brave-browser >/dev/null
+        sudo apt update && sudo apt install -y brave-browser
         if [ $? == 0 ]; then
             echo -e [$check]
         else
