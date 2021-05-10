@@ -194,6 +194,7 @@ dotfiles_download() {
     sed -i 's/whoami/$(whoami)/g' .fzf.zsh
     rm ~/.config/qterminal.org/qterminal.ini
     wget -O ~/.config/qterminal.org/qterminal.ini https://raw.githubusercontent.com/aci686/dotfiles/main/.config/qterminal.org/qterminal.ini
+    mv qterminal.ini ~/.config/qterminal.org/
     cd ~
 }
 
