@@ -183,11 +183,16 @@ fonts_check() {
 
 dotfiles_download() {
     echo -e "[$info] Downloading relevant dotfiles..."
+    rm ~/.zshrc
     wget -O .zshrc https://raw.githubusercontent.com/aci686/dotfiles/main/.zshrc
+    rm ~/.vimrc
     wget -O .vimrc https://raw.githubusercontent.com/aci686/dotfiles/main/.vimrc
+    rm ~/.p10k.zsh
     wget -O .p10k.zsh https://raw.githubusercontent.com/aci686/dotfiles/main/.p10k.zsh
+    rm ~/.fzf.zsh
     wget -O .fzf.zsh https://raw.githubusercontent.com/aci686/dotfiles/main/.fzf.zsh
     sed -i 's/whoami/$(whoami)/g' .fzf.zsh
+    rm ~/.config/qterminal.org/qterminal.ini
     wget -O ~/.config/qterminal.org/qterminal.ini https://raw.githubusercontent.com/aci686/dotfiles/main/.config/qterminal.org/qterminal.ini
     cd ~
 }
