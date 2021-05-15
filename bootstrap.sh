@@ -183,6 +183,17 @@ fonts_check() {
     cd ~
 }
 
+tmux_check() {
+    echo -e "[$info] Installing Tmux..."
+    sudo apt install -y tmux
+    if [ $? == 0 ]; then
+        echo -e [$check]
+    else
+        echo -e [$missing]
+    fi
+    cd ~
+}
+
 dotfiles_download() {
     echo -e "[$info] Downloading relevant dotfiles..."
     rm ~/.zshrc
@@ -193,6 +204,8 @@ dotfiles_download() {
     wget --no-cache --no-cookies https://raw.githubusercontent.com/aci686/dotfiles/main/.p10k.zsh
     rm ~/.fzf.zsh
     wget --no-cache --no-cookies https://raw.githubusercontent.com/aci686/dotfiles/main/.fzf.zsh
+    rm ~/.tmux.conf
+    wget --no-cache --no-cookies https://raw.githubusercontent.com/aci686/dotfiles/main/.tmux.conf
     rm ~/.config/qterminal.org/qterminal.ini
     rm ~/qterminal.ini
     wget --no-cache --no-cookies https://raw.githubusercontent.com/aci686/dotfiles/main/.config/qterminal.org/qterminal.ini
