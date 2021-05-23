@@ -194,6 +194,17 @@ tmux_check() {
     cd ~
 }
 
+ranger_check() {
+    echo -e "[$info] Installing Ranger..."
+    sudo apt install -y ranger
+    if [ $? == 0 ]; then
+        echo -e [$check]
+    else
+        echo -e [$missing]
+    fi
+    cd ~
+}
+
 dotfiles_download() {
     echo -e "[$info] Downloading relevant dotfiles..."
     rm ~/.zshrc
@@ -227,4 +238,5 @@ bravebrowser_check
 lsd_check
 fzf_check
 fonts_check
+ranger_check
 dotfiles_download
