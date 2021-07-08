@@ -31,9 +31,9 @@ Download these four ttf files:
 Double-click on each file and click "Install". This will make `MesloLGS NF` font available to all
 applications on your system. Configure your terminal to use this font:
 
-- **iTerm2**: Open *iTerm2 → Preferences → Profiles → Text* and set *Font* to `MesloLGS NF`.
-  Alternatively, type `p10k configure` and answer `Yes` when asked whether to install
-  *Meslo Nerd Font*.
+- **iTerm2**: Type `p10k configure` and answer `Yes` when asked whether to install
+  *Meslo Nerd Font*. Alternatively, open *iTerm2 → Preferences → Profiles → Text* and set *Font* to
+  `MesloLGS NF`.
 - **Apple Terminal**: Open *Terminal → Preferences → Profiles → Text*, click *Change* under *Font*
   and select `MesloLGS NF` family.
 - **Hyper**: Open *Hyper → Edit → Preferences* and change the value of `fontFamily` under
@@ -49,10 +49,14 @@ applications on your system. Configure your terminal to use this font:
   *Custom font* under *Text Appearance* and select `MesloLGS NF Regular`.
 - **Windows Console Host** (the old thing): Click the icon in the top left corner, then
   *Properties → Font* and set *Font* to `MesloLGS NF`.
-- **Microsoft Terminal** (the new thing): Open *Settings* (`Ctrl+,`), search for `fontFace` and set
-  value to `MesloLGS NF` for every profile.
-- **IntelliJ**: Open *Intellij → Edit → Preferences → Editor → Color Scheme → Console Font*. 
-  Select *Use console font instead of the default* and set the font name to `MesloLGS NF`.
+- **Windows Terminal** by Microsoft (the new thing): Open `settings.json` (<kbd>Ctrl+Shift+,</kbd>),
+  search for `fontFace` and set the value to `MesloLGS NF` for every profile. If you don't find
+  `fontFace`, add it under *profiles → default*. See [this settings file](
+    https://raw.githubusercontent.com/romkatv/dotfiles-public/aba0e6c4657d705ed6c344d700d659977385f25c/dotfiles/microsoft-terminal-settings.json)
+  for example.
+- **IntelliJ** (and other IDEs by Jet Brains): Open *IDE → Edit → Preferences → Editor →
+  Color Scheme → Console Font*. Select *Use console font instead of the default* and set the font
+  name to `MesloLGS NF`.
 - **Termux**: Type `p10k configure` and answer `Yes` when asked whether to install
   *Meslo Nerd Font*.
 - **Blink**: Type `config`, go to *Appearance*, tap *Add a new font*, tap *Open Gallery*, select
@@ -61,9 +65,17 @@ applications on your system. Configure your terminal to use this font:
 - **Terminator**: Open *Preferences* using the context menu. Under *Profiles* select the *General*
   tab (should be selected already), uncheck *Use the system fixed width font* (if not already)
   and select `MesloLGS NF Regular`. Exit the Preferences dialog by clicking *Close*.
-- **Guake**: Right Click on an open terminal and open *Preferences*. Under *Appearance* 
-  tab, uncheck *Use the system fixed width font* (if not already) and select `MesloLGS NF Regular`. 
-  Exit the Preferences dialog by clicking *Close*.  
+- **Guake**: Right Click on an open terminal and open *Preferences*. Under *Appearance*
+  tab, uncheck *Use the system fixed width font* (if not already) and select `MesloLGS NF Regular`.
+  Exit the Preferences dialog by clicking *Close*.
+- **MobaXterm**: Open *Settings* → *Configuration* → *Terminal* → (under *Terminal look and feel*)
+  and change *Font* to `MesloLGS NF`.
+- **Asbrú Connection Manager**: Open *Preferences → Local Shell Options → Look and Feel*, enable
+  *Use these personal options* and change *Font:* under *Terminal UI* to `MesloLGS NF Regular`.
+  To change the font for the remote host connections, go to *Preferences → Terminal Options →
+  Look and Feel* and change *Font:* under *Terminal UI* to `MesloLGS NF Regular`.
+- **WSLtty**: Right click on an open terminal and then on *Options*. In the *Text* section, under
+  *Font*, click *"Select..."* and set Font to `MesloLGS NF Regular`.
 - **Alacritty**: Create or open `~/.config/alacritty/alacritty.yml` and add the following section
   to it:
   ```yaml
@@ -76,7 +88,7 @@ applications on your system. Configure your terminal to use this font:
    font_family MesloLGS NF
    ```
    Restart Kitty by closing all sessions and opening a new session.
-
+ 
 **IMPORTANT:** Run `p10k configure` after changing terminal font. The old `~/.p10k.zsh` may work
 incorrectly with the new font.
 

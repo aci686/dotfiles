@@ -89,7 +89,7 @@ Note how the effect of every command is instantly reflected by the very next pro
 
 | Command                       | Prompt Indicator | Meaning                                                               |
 |-------------------------------|:----------------:|----------------------------------------------------------------------:|
-| `timew start hack linux`      | `🛡️ hack linux`  | time tracking enabled in [timewarrior](https://timewarrior.net/)      |
+| `timew start hack linux`      | `⌚ hack linux`  | time tracking enabled in [timewarrior](https://timewarrior.net/)      |
 | `touch x y`                   | `?2`             | 2 untracked files in the Git repo                                     |
 | `rm COPYING`                  | `!1`             | 1 unstaged change in the Git repo                                     |
 | `echo 3.7.3 >.python-version` | `🐍 3.7.3`       | the current python version in [pyenv](https://github.com/pyenv/pyenv) |
@@ -183,8 +183,8 @@ Here's the relevant parameter for kubernetes context:
 
 ```zsh
 # Show prompt segment "kubecontext" only when the command you are typing
-# invokes kubectl, helm, kubens, kubectx, oc, istioctl, kogito, k9s or helmfile.
-typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s|helmfile'
+# invokes kubectl, helm, kubens, kubectx, oc, istioctl, kogito, k9s, helmfile, fluxctl or stern.
+typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s|helmfile|fluxctl|stern'
 ```
 
 To customize when different prompt segments are shown, open `~/.p10k.zsh`, search for
@@ -307,6 +307,7 @@ enable as many segments as you like. It won't slow down your prompt or Zsh start
 | `nordvpn` | [nordvpn](https://nordvpn.com/) connection status |
 | `ranger` | [ranger](https://github.com/ranger/ranger) shell |
 | `nnn` | [nnn](https://github.com/jarun/nnn) shell |
+| `xplr` | [xplr](https://github.com/sayanarijit/xplr) shell |
 | `vim_shell` | [vim](https://www.vim.org/) shell (`:sh`) |
 | `midnight_commander` | [midnight commander](https://midnight-commander.org/) shell |
 | `nix_shell` | [nix shell](https://nixos.org/nixos/nix-pills/developing-with-nix-shell.html) indicator |
@@ -421,7 +422,7 @@ supported by Powerlevel10k.
 
 ```zsh
 brew install romkatv/powerlevel10k/powerlevel10k
-echo 'source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+echo "source $(brew --prefix)/opt/powerlevel10k/powerlevel10k.zsh-theme" >>~/.zshrc
 ```
 
 ### Arch Linux
@@ -533,9 +534,9 @@ Download these four ttf files:
 Double-click on each file and click "Install". This will make `MesloLGS NF` font available to all
 applications on your system. Configure your terminal to use this font:
 
-- **iTerm2**: Open *iTerm2 → Preferences → Profiles → Text* and set *Font* to `MesloLGS NF`.
-  Alternatively, type `p10k configure` and answer `Yes` when asked whether to install
-  *Meslo Nerd Font*.
+- **iTerm2**: Type `p10k configure` and answer `Yes` when asked whether to install
+  *Meslo Nerd Font*. Alternatively, open *iTerm2 → Preferences → Profiles → Text* and set *Font* to
+  `MesloLGS NF`.
 - **Apple Terminal**: Open *Terminal → Preferences → Profiles → Text*, click *Change* under *Font*
   and select `MesloLGS NF` family.
 - **Hyper**: Open *Hyper → Edit → Preferences* and change the value of `fontFamily` under
@@ -551,10 +552,14 @@ applications on your system. Configure your terminal to use this font:
   *Custom font* under *Text Appearance* and select `MesloLGS NF Regular`.
 - **Windows Console Host** (the old thing): Click the icon in the top left corner, then
   *Properties → Font* and set *Font* to `MesloLGS NF`.
-- **Microsoft Terminal** (the new thing): Open *Settings* (`Ctrl+,`), search for `fontFace` and set
-  value to `MesloLGS NF` for every profile.
-- **IntelliJ**: Open *Intellij → Edit → Preferences → Editor → Color Scheme → Console Font*. 
-  Select *Use console font instead of the default* and set the font name to `MesloLGS NF`.
+- **Windows Terminal** by Microsoft (the new thing): Open `settings.json` (<kbd>Ctrl+Shift+,</kbd>),
+  search for `fontFace` and set the value to `MesloLGS NF` for every profile. If you don't find
+  `fontFace`, add it under *profiles → default*. See [this settings file](
+    https://raw.githubusercontent.com/romkatv/dotfiles-public/aba0e6c4657d705ed6c344d700d659977385f25c/dotfiles/microsoft-terminal-settings.json)
+  for example.
+- **IntelliJ** (and other IDEs by Jet Brains): Open *IDE → Edit → Preferences → Editor →
+  Color Scheme → Console Font*. Select *Use console font instead of the default* and set the font
+  name to `MesloLGS NF`.
 - **Termux**: Type `p10k configure` and answer `Yes` when asked whether to install
   *Meslo Nerd Font*.
 - **Blink**: Type `config`, go to *Appearance*, tap *Add a new font*, tap *Open Gallery*, select
@@ -563,9 +568,17 @@ applications on your system. Configure your terminal to use this font:
 - **Terminator**: Open *Preferences* using the context menu. Under *Profiles* select the *General*
   tab (should be selected already), uncheck *Use the system fixed width font* (if not already)
   and select `MesloLGS NF Regular`. Exit the Preferences dialog by clicking *Close*.
-- **Guake**: Right Click on an open terminal and open *Preferences*. Under *Appearance* 
-  tab, uncheck *Use the system fixed width font* (if not already) and select `MesloLGS NF Regular`. 
-  Exit the Preferences dialog by clicking *Close*.  
+- **Guake**: Right Click on an open terminal and open *Preferences*. Under *Appearance*
+  tab, uncheck *Use the system fixed width font* (if not already) and select `MesloLGS NF Regular`.
+  Exit the Preferences dialog by clicking *Close*.
+- **MobaXterm**: Open *Settings* → *Configuration* → *Terminal* → (under *Terminal look and feel*)
+  and change *Font* to `MesloLGS NF`.
+- **Asbrú Connection Manager**: Open *Preferences → Local Shell Options → Look and Feel*, enable
+  *Use these personal options* and change *Font:* under *Terminal UI* to `MesloLGS NF Regular`.
+  To change the font for the remote host connections, go to *Preferences → Terminal Options →
+  Look and Feel* and change *Font:* under *Terminal UI* to `MesloLGS NF Regular`.
+- **WSLtty**: Right click on an open terminal and then on *Options*. In the *Text* section, under
+  *Font*, click *"Select..."* and set Font to `MesloLGS NF Regular`.
 - **Alacritty**: Create or open `~/.config/alacritty/alacritty.yml` and add the following section
   to it:
   ```yaml
@@ -578,6 +591,21 @@ applications on your system. Configure your terminal to use this font:
    font_family MesloLGS NF
    ```
    Restart Kitty by closing all sessions and opening a new session.
+- **WezTerm**: Create or open `$HOME/.config/wezterm/wezterm.lua` and add the following:
+  ```lua
+  local wezterm = require 'wezterm';
+  return {
+      font = wezterm.font("MesloLGS NF"),
+  }
+  ```
+  If the file already exists, only add the line with the font to the existing return. 
+  Also add the first line if it is not already present.
+- **urxvt**: Create or open `~/.Xresources` and add the following line to it:
+   ```text
+   URxvt.font: xft:MesloLGS NF:size=11
+   ```
+  You can adjust the font size to your preference. After changing the configuration use `xrdb ~/.Xresources` to reload the config. 
+  The new config is applied for all new terminals.
 
 **IMPORTANT:** Run `p10k configure` after changing terminal font. The old `~/.p10k.zsh` may work
 incorrectly with the new font.
@@ -874,17 +902,18 @@ Zsh but it won't do anything.
 When using Lean, Classic or Rainbow style, Git status may look like this:
 
 ```text
-feature:master ⇣42⇡42 ⇠42⇢42 *42 merge ~42 +42 !42 ?42
+feature:master wip ⇣42⇡42 ⇠42⇢42 *42 merge ~42 +42 !42 ?42
 ```
 
 | Symbol    | Meaning                                                              | Source                                                 |
 | --------- | -------------------------------------------------------------------- | ------------------------------------------------------ |
 | `feature` | current branch; replaced with `#tag` or `@commit` if not on a branch | `git status --ignore-submodules=dirty`                 |
-| `master`  | remote tracking branch; only shown if different from local branch    | `git rev-parse --abbrev-ref --symbolic-full-name @{u}` |
-| `⇣42`     | this many commits behind the remote                                  | `git status --ignore-submodules=dirty`                 |
-| `⇡42`     | this many commits ahead of the remote                                | `git status --ignore-submodules=dirty`                 |
-| `⇠42`     | this many commits behind the push remote                             | `git rev-list --left-right --count HEAD...@{push}`     |
-| `⇢42`     | this many commits ahead of the push remote                           | `git rev-list --left-right --count HEAD...@{push}`     |
+| `master`  | remote tracking branch; only shown if different from local branch    | `git rev-parse --abbrev-ref --symbolic-full-name @{upstream}` |
+| `wip`     | the latest commit's summary contains "wip" or "WIP"                  | `git show --pretty=%s --no-patch HEAD`                 |
+| `⇣42`     | this many commits behind the remote                                  | `git rev-list --right-only --count HEAD...@{upstream}` |
+| `⇡42`     | this many commits ahead of the remote                                | `git rev-list --left-only --count HEAD...@{upstream}`  |
+| `⇠42`     | this many commits behind the push remote                             | `git rev-list --right-only --count HEAD...@{push}`     |
+| `⇢42`     | this many commits ahead of the push remote                           | `git rev-list --left-only --count HEAD...@{push}`      |
 | `*42`     | this many stashes                                                    | `git stash list`                                       |
 | `merge`   | repository state                                                     | `git status --ignore-submodules=dirty`                 |
 | `~42`     | this many merge conflicts                                            | `git status --ignore-submodules=dirty`                 |
@@ -925,10 +954,24 @@ computation completes.
 
 When your current directory is within a Git repository, Powerlevel10k computes up-to-date Git
 status after every command. If the repository is large, or the machine is slow, this computation
-can take quite a bit of time. If it takes longer than 20 milliseconds (configurable via
+can take quite a bit of time. If it takes longer than 10 milliseconds (configurable via
 `POWERLEVEL9K_VCS_MAX_SYNC_LATENCY_SECONDS`), Powerlevel10k displays the last known Git status in
 grey and continues to compute up-to-date Git status in the background. When the computation
 completes, Powerlevel10k refreshes prompt with new information, this time with colored Git status.
+
+When using *Rainbow* style, Git status is displayed as black on grey while it's still being
+computed. Depending on the terminal color palette, this may be difficult to read. In this case you
+might want to change the background color to something ligher for more contrast. To do that, open
+`~/.p10k.zsh`, search for `POWERLEVEL9K_VCS_LOADING_BACKGROUND`, uncomment it if it's commented out,
+and change the value.
+
+```zsh
+typeset -g POWERLEVEL9K_VCS_LOADING_BACKGROUND=244
+```
+
+Type `source ~/.p10k.zsh` to apply your changes to the current Zsh session.
+
+*Related*: [How do I change prompt colors?](#how-do-i-change-prompt-colors)
 
 ### How do I add username and/or hostname to prompt?
 
@@ -972,8 +1015,8 @@ a relevant tool.
 
 ```zsh
 # Show prompt segment "kubecontext" only when the command you are typing
-# invokes kubectl, helm, kubens, kubectx, oc, istioctl, kogito, k9s or helmfile.
-typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s|helmfile'
+# invokes kubectl, helm, kubens, kubectx, oc, istioctl, kogito, k9s, helmfile, fluxctl or stern.
+typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s|helmfile|fluxctl|stern'
 ```
 
 Configs created by `p10k configure` may contain parameters of this kind. To customize when different
@@ -989,7 +1032,7 @@ function kube-toggle() {
   if (( ${+POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND} )); then
     unset POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND
   else
-    POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s|helmfile'
+    POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s|helmfile|fluxctl|stern'
   fi
   p10k reload
   if zle; then
@@ -1048,6 +1091,10 @@ To see how different colors look in your terminal, run the following command:
 for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}; done
 ```
 
+*Related:*
+  - [Directory is difficult to see in prompt when using Rainbow style.](
+      #directory-is-difficult-to-see-in-prompt-when-using-rainbow-style)
+
 ### Why does Powerlevel10k spawn extra processes?
 
 Powerlevel10k uses [gitstatus](https://github.com/romkatv/gitstatus) as the backend behind `vcs`
@@ -1084,7 +1131,7 @@ times faster than powerlevel9k/master and 17 times faster than powerlevel9k/next
 
 Powerlevel10k was forked from Powerlevel9k in March 2019 after a week-long discussion in
 [powerlevel9k#1170](https://github.com/Powerlevel9k/powerlevel9k/issues/1170). Powerlevel9k was
-already a mature project with large user base and release cycle measured in months. Powerlevel10k
+already a mature project with a large user base and a release cycle measured in months. Powerlevel10k
 was spun off to iterate on performance improvements and new features at much higher pace.
 
 Powerlevel9k and Powerlevel10k are independent projects. When using one, you shouldn't install the
@@ -1441,11 +1488,11 @@ From [Zsh documentation](
   http://zsh.sourceforge.net/Doc/Release/Parameters.html#index-ZLE_005fRPROMPT_005fINDENT):
 
 > `ZLE_RPROMPT_INDENT <S>`
-> 
+>
 > If set, used to give the indentation between the right hand side of the right prompt in the line
 > editor as given by `RPS1` or `RPROMPT` and the right hand side of the screen. If not set, the
 > value `1` is used.
-> 
+>
 > Typically this will be used to set the value to `0` so that the prompt appears flush with the
 > right hand side of the screen.
 

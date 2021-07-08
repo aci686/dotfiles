@@ -132,6 +132,7 @@ function _p9k_init_icons() {
         LUA_ICON                       'lua'
         PERL_ICON                      'perl'
         NNN_ICON                       'nnn'
+        XPLR_ICON                      'xplr'
         TIMEWARRIOR_ICON               'tw'
         TASKWARRIOR_ICON               'task'
         NIX_SHELL_ICON                 'nix'
@@ -239,7 +240,7 @@ function _p9k_init_icons() {
         NORDVPN_ICON                   '\UF023'               # 
         EXECUTION_TIME_ICON            '\uF253'$s             # 
         SSH_ICON                       'ssh'
-        VPN_ICON                       '\uF023' 
+        VPN_ICON                       '\uF023'
         KUBERNETES_ICON                '\U2388'               # ⎈
         DROPBOX_ICON                   '\UF16B'$s             # 
         DATE_ICON                      '\uF073 '              # 
@@ -260,6 +261,7 @@ function _p9k_init_icons() {
         LUA_ICON                       'lua'
         PERL_ICON                      'perl'
         NNN_ICON                       'nnn'
+        XPLR_ICON                      'xplr'
         TIMEWARRIOR_ICON               'tw'
         TASKWARRIOR_ICON               'task'
         NIX_SHELL_ICON                 'nix'
@@ -391,6 +393,7 @@ function _p9k_init_icons() {
         LUA_ICON                       'lua'
         PERL_ICON                      'perl'
         NNN_ICON                       'nnn'
+        XPLR_ICON                      'xplr'
         TIMEWARRIOR_ICON               'tw'
         TASKWARRIOR_ICON               'task'
         NIX_SHELL_ICON                 'nix'
@@ -520,6 +523,7 @@ function _p9k_init_icons() {
         LUA_ICON                       '\uE620'               # 
         PERL_ICON                      '\uE769'               # 
         NNN_ICON                       'nnn'
+        XPLR_ICON                      'xplr'
         TIMEWARRIOR_ICON               '\uF49B'               # 
         TASKWARRIOR_ICON               '\uF4A0 '              # 
         NIX_SHELL_ICON                 '\uF313 '              # 
@@ -646,6 +650,7 @@ function _p9k_init_icons() {
         LUA_ICON                       'lua'
         PERL_ICON                      'perl'
         NNN_ICON                       'nnn'
+        XPLR_ICON                      'xplr'
         TIMEWARRIOR_ICON               'tw'
         TASKWARRIOR_ICON               'task'
         NIX_SHELL_ICON                 'nix'
@@ -680,7 +685,7 @@ function _p9k_init_icons() {
         TEST_ICON                      ''
         TODO_ICON                      '\u2206'               # ∆
         BATTERY_ICON                   '\U1F50B'              # 🔋
-        DISK_ICON                      'hdd' 
+        DISK_ICON                      'hdd'
         OK_ICON                        '\u2714'               # ✔
         FAIL_ICON                      '\u2718'               # ✘
         SYMFONY_ICON                   'SF'
@@ -774,6 +779,7 @@ function _p9k_init_icons() {
         LUA_ICON                       'lua'
         PERL_ICON                      'perl'
         NNN_ICON                       'nnn'
+        XPLR_ICON                      'xplr'
         TIMEWARRIOR_ICON               'tw'
         TASKWARRIOR_ICON               'task'
         NIX_SHELL_ICON                 'nix'
@@ -810,6 +816,7 @@ function _p9k_init_icons() {
     icons[LEFT_SEGMENT_END_SEPARATOR]+=' '
     icons[MULTILINE_LAST_PROMPT_PREFIX]+=' '
     icons[VCS_TAG_ICON]+=' '
+    icons[VCS_BOOKMARK_ICON]+=' '
     icons[VCS_COMMIT_ICON]+=' '
     icons[VCS_BRANCH_ICON]+=' '
     icons[VCS_REMOTE_BRANCH_ICON]+=' '
