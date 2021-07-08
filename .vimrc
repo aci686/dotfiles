@@ -9,7 +9,7 @@ set mouse=a
 set autoindent
 set wrap
 set linebreak
-#set textwidth=80
+"set textwidth=80
 set wrapmargin=0
 set t_u7=
 
