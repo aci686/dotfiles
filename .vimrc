@@ -1,11 +1,16 @@
 syntax on
-set expandtab
-set mouse=a
-set number
-set relativenumber
+set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-set tabstop=4
+set expandtab
+set number
+set relativenumber
+set mouse=a
+set autoindent
+set wrap
+set linebreak
+#set textwidth=80
+set wrapmargin=0
 set t_u7=
 
 let g:airline_solarized_bg='dark'
